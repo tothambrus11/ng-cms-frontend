@@ -1,0 +1,4 @@
+<youtube-player *ngIf="metadata.type==='youtube'" [videoId]="getVideoId()"></youtube-player>
+<video *ngIf="metadata.type==='mp4'" controls>
+  <source [src]="metadata.source" type="video/mp4">
+</video>
