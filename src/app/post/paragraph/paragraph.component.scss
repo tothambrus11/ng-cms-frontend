@@ -1,0 +1,11 @@
+@import "../post-variables";
+
+*{
+  font-size: 18px;
+  line-height: 28px;
+}
+p{
+  margin: $post-margin;
+  display: block;
+  text-align: justify;
+}

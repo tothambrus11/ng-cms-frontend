@@ -1,4 +1,14 @@
-<youtube-player *ngIf="metadata.type==='youtube'" [videoId]="getVideoId()"></youtube-player>
-<video *ngIf="metadata.type==='mp4'" controls>
+<div class="video">
+  <div class="resp-container" *ngIf="metadata.type == 'youtube'">
+    <iframe
+      class="resp-iframe"
+      [src]="'https://www.youtube.com/embed/' + getVideoId() + '?autoplay=' + (metadata.autoplay ? '1': '0') + '&start='+(metadata.startTime ? metadata.startTime : 0) | safeurl"
+      frameborder="0"
+      allowfullscreen
+      allow="encrypted-media">
+    </iframe>
+  </div>
+</div>
+<video *ngIf="metadata.type==='mp4'" controls class="video" [autoplay]="metadata.autoplay" #videoTag>
   <source [src]="metadata.source" type="video/mp4">
 </video>

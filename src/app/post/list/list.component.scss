@@ -1,0 +1,20 @@
+@import "../post-variables";
+
+$list-bullet-padding: 40px;
+
+ol, ul{
+  padding-left: $list-bullet-padding;
+  margin: $post-margin;
+
+  li{
+    line-height: 26px;
+    font-size: 18px;
+    margin-bottom: 10px;
+
+    span{
+      padding-left: $list-bullet-padding / 2;
+      text-align: left;
+      display: block;
+    }
+  }
+}

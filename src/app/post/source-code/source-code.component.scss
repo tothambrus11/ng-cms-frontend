@@ -1,5 +1,7 @@
-code{
-  padding: 10px;
-  background-color: #ddd;
-  color: black;
+@import "../post-variables";
+
+pre{
+  border-radius: 0;
+  margin: 0 !important;
+  padding: 16px $post-margin
 }

@@ -1,29 +1,39 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ComponentType, ContentComponent, Metadata} from '../ContentComponentMetadata';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ContentComponent} from '../ContentComponentMetadata';
 import {VideoMetadata} from './VideoMetadata';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'post-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss']
 })
-export class VideoComponent implements ContentComponent, OnInit {
+export class VideoComponent implements ContentComponent, OnInit, AfterViewInit {
   @Input() metadata: VideoMetadata;
+  @ViewChild('videoTag') videoTag: ElementRef;
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    if (this.metadata.type === 'youtube') {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-    }
-  }
 
+  }
 
   getVideoId() {
     let parts = this.metadata.source.split('v=');
     return parts[parts.length - 1];
   }
+
+  ngAfterViewInit(): void {
+    if (this.metadata.type === 'mp4' && this.metadata.startTime) {
+      let el: HTMLVideoElement = this.videoTag.nativeElement;
+      el.currentTime = this.metadata.startTime;
+      if (this.metadata.autoplay) {
+        el.play();
+      } else {
+        el.pause();
+      }
+    }
+  }
 }
+

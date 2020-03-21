@@ -1,0 +1,12 @@
+<ul *ngIf="metadata.orderType === OrderType.NONE">
+  <li *ngFor="let entry of metadata.content">
+    <app-list *ngIf="entry.orderType" [metadata]="entry"></app-list>
+    <span *ngIf="!entry.orderType" [innerHTML]="entry"></span>
+  </li>
+</ul>
+<ol *ngIf="metadata.orderType !== OrderType.NONE" [ngStyle]="{listStyle: getListStyle(metadata.orderType)}">
+  <li *ngFor="let entry of metadata.content">
+    <app-list *ngIf="entry.orderType" [metadata]="entry"></app-list>
+    <span *ngIf="!entry.orderType" [innerHTML]="entry"></span>
+  </li>
+</ol>
